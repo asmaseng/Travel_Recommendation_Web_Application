@@ -4,33 +4,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website - Home</title>
-   <link rel="stylesheet" href="css/style.css">
+    <title>Travel Explorer</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .travel-hero {
+            text-align: center;
+            padding: 65px 20px;
+            background: #e8f5f1;
+        }
+
+        .travel-hero h2 {
+            font-size: 38px;
+            color: #164e45;
+            margin-bottom: 15px;
+        }
+
+        .travel-hero p {
+            max-width: 650px;
+            margin: 0 auto 25px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .search-container input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-container button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #167d68;
+            color: white;
+        }
+
+        .recommendations {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .travel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+            margin-top: 20px;
+        }
+
+        .travel-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        .travel-card img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+        }
+
+        .travel-card div {
+            padding: 16px;
+        }
+
+        .travel-card h3 {
+            color: #164e45;
+            margin-bottom: 8px;
+        }
+
+        .travel-card p {
+            font-size: 14px;
+        }
+
+        #searchMessage {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .navbar nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .travel-hero h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <header>
-        <h1>My Website</h1>
+    <header class="navbar">
+
+        <h1>Travel Explorer</h1>
+
         <nav>
             <a href="index.html">Home</a>
-           <a href="html/about.html">About Us</a>
-           <a href="html/contact.html">Contact Us</a>
+            <a href="html/about.html">About Us</a>
+            <a href="html/contact.html">Contact Us</a>
         </nav>
+
+        <div class="search-container">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search beach, temple, country..."
+            >
+
+            <button onclick="searchPlaces()">Search</button>
+
+            <button onclick="clearSearch()">Clear</button>
+        </div>
+
     </header>
 
-    <main class="hero">
-        <h2>Welcome to Our Website!</h2>
-        <p>
-            Welcome to our website! This platform is created to
-            share information, introduce our team, and help
-            visitors learn more about our project.
-        </p>
-        <a class="button" href="html/about.html">Learn More</a>
+    <main>
+
+        <section class="travel-hero">
+            <h2>Explore the World!</h2>
+
+            <p>
+                Discover amazing beaches, historical temples,
+                and beautiful countries around the world.
+                Find your next travel destination with Travel Explorer.
+            </p>
+        </section>
+
+        <section class="recommendations">
+
+            <h2>Popular Travel Destinations</h2>
+
+            <p>
+                Search for beaches, temples, or countries
+                and discover amazing places.
+            </p>
+
+            <p id="searchMessage">
+                Showing all recommendations.
+            </p>
+
+            <div class="travel-grid" id="results">
+
+                <article class="travel-card" data-category="beach">
+                    <img
+                        src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600"
+                        alt="Maldives beach"
+                    >
+                    <div>
+                        <h3>Maldives Beach</h3>
+                        <p>
+                            Enjoy beautiful white sand,
+                            clear turquoise water, and tropical islands.
+                        </p>
+                        <strong>Category: Beach</strong>
+                    </div>
+                </article>
+
+                <article class="travel-card" data-category="beach">
+                    <img
+                        src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600"
+                        alt="Bali beach"
+                    >
+                    <div>
+                        <h3>Bali Beach</h3>
+                        <p>
+                            Explore tropical beaches,
+                            beautiful nature, and ocean views in Bali.
+                        </p>
+                        <strong>Category: Beach</strong>
+                    </div>
+                </article>
+
+                <article class="travel-card" data-category="temple">
+                    <img
+                        src="https://images.unsplash.com/photo-1548013146-72479768bada?w=600"
+                        alt="Taj Mahal"
+                    >
+                    <div>
+                        <h3>Taj Mahal</h3>
+                        <p>
+                            Visit one of India's most famous
+                            historical monuments.
+                        </p>
+                        <strong>Category: Temple</strong>
+                    </div>
+                </article>
+
+                <article class="travel-card" data-category="temple">
+                    <img
+                        src="https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?w=600"
+                        alt="Ancient temple"
+                    >
+                    <div>
+                        <h3>Angkor Wat</h3>
+                        <p>
+                            Discover the impressive ancient
+                            temple complex in Cambodia.
+                        </p>
+                        <strong>Category: Temple</strong>
+                    </div>
+                </article>
+
+                <article class="travel-card" data-category="country">
+                    <img
+                        src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600"
+                        alt="Japan"
+                    >
+                    <div>
+                        <h3>Japan</h3>
+                        <p>
+                            Experience Japanese culture,
+                            beautiful cities, and traditional architecture.
+                        </p>
+                        <strong>Category: Country</strong>
+                    </div>
+                </article>
+
+                <article class="travel-card" data-category="country">
+                    <img
+                        src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=600"
+                        alt="Italy"
+                    >
+                    <div>
+                        <h3>Italy</h3>
+                        <p>
+                            Discover historical cities,
+                            famous landmarks, and Italian culture.
+                        </p>
+                        <strong>Category: Country</strong>
+                    </div>
+                </article>
+
+            </div>
+
+        </section>
+
     </main>
 
     <footer>
-        <p>&copy; 2026 My Website. All rights reserved.</p>
+        <p>© 2026 Travel Explorer. All rights reserved.</p>
     </footer>
+
+    <script>
+        function searchPlaces() {
+
+            const input = document
+                .getElementById("searchInput")
+                .value.trim().toLowerCase();
+
+            const cards = document.querySelectorAll(".travel-card");
+
+            let count = 0;
+
+            cards.forEach(function(card) {
+
+                const category = card.dataset.category;
+                const name = card.querySelector("h3")
+                    .textContent.toLowerCase();
+
+                const description = card.querySelector("p")
+                    .textContent.toLowerCase();
+
+                const matches =
+                    category.includes(input) ||
+                    name.includes(input) ||
+                    description.includes(input);
+
+                if (input === "" || matches) {
+                    card.style.display = "block";
+                    count++;
+                } else {
+                    card.style.display = "none";
+                }
+
+            });
+
+            document.getElementById("searchMessage").textContent =
+                count + " travel recommendations found.";
+
+        }
+
+        function clearSearch() {
+
+            document.getElementById("searchInput").value = "";
+
+            const cards = document.querySelectorAll(".travel-card");
+
+            cards.forEach(function(card) {
+                card.style.display = "block";
+            });
+
+            document.getElementById("searchMessage").textContent =
+                "Showing all recommendations.";
+
+        }
+
+        document.getElementById("searchInput")
+            .addEventListener("keydown", function(event) {
+                if (event.key === "Enter") {
+                    searchPlaces();
+                }
+            });
+    </script>
 
 </body>
 </html>
